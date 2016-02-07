@@ -85,10 +85,10 @@ package codingProblems;
              node = new BTNode(data);
          else
          {
-             if (node.getRight() == null)
-                 node.right = insert(node.right, data);
+             if (node.getLeft() == null)
+                 node.left = insert(node.left, data);
              else
-                 node.left = insert(node.left, data);             
+                 node.right = insert(node.right, data);             
          }
          return node;
      }     
@@ -221,7 +221,8 @@ package codingProblems;
             bt.inorder();
  
             System.out.println("\n\nDo you want to continue (Type y or n) \n");
-            ch = scan.next().charAt(0);                        
-        } while (ch == 'Y'|| ch == 'y');               
+            ch = scan.next().charAt(0);             
+        } while (ch == 'Y'|| ch == 'y');   
+        scan.close();
     }
  }
