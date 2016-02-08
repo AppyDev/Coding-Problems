@@ -1,3 +1,6 @@
+/*write a function that takes in an int and returns a string that would be how one would 
+ * say that number (ex: 123 -> one hundred twenty three; 50019 -> five thousand nineteen)
+*/
 package codingProblems;
 import java.util.Scanner;
 public class digitToWord { 
@@ -29,9 +32,8 @@ public class digitToWord {
             System.out.println("Enter numbers greater than 0"); 
         else { 
         	digitToWord a = new digitToWord(); 
-            a.pw((n/1000000000),"Hundred "); 
-            a.pw((n/10000000)%100,"crore "); 
-            a.pw(((n/100000)%100),"lakh "); 
+            a.pw((n/1000000)%100,"million ");
+            a.pw(((n/10000)%100),"lakh "); 
             a.pw(((n/1000)%100),"thousand "); 
             a.pw(((n/100)%10),"hundred "); 
             a.pw((n%100)," "); 

@@ -1,126 +1,104 @@
 package codingProblems;
 
-public class MaxHeap
+/**
+ * Find Kth Largest element in an unsorted array using Max-Heap 
+ * 1) Build a Max Heap tree in O(n)
+ * 2) Use Extract Max k times to get kth maximum element. O(klogn)
+ * Time complexity: O(n + klogn)
+ */
+public class MaxHeap 
 {
-    private int[] Heap;
-    private int size;
-    private int maxsize;
- 
-    private static final int FRONT = 1;
- 
-    public MaxHeap(int maxsize)
-    {
-        this.maxsize = maxsize;
-        this.size = 0;
-        Heap = new int[this.maxsize + 1];
-        Heap[0] = Integer.MAX_VALUE;
-    }
- 
-    private int parent(int pos)
-    {
-        return pos / 2;
-    }
- 
-    private int leftChild(int pos)
-    {
-        return (2 * pos);
-    }
- 
-    private int rightChild(int pos)
-    {
-        return (2 * pos) + 1;
-    }
- 
-    private boolean isLeaf(int pos)
-    {
-        if (pos >=  (size / 2)  &&  pos <= size)
-        {
-            return true;
-        }
-        return false;
-    }
- 
-    private void swap(int fpos,int spos)
-    {
-        int tmp;
-        tmp = Heap[fpos];
-        Heap[fpos] = Heap[spos];
-        Heap[spos] = tmp;
-    }
- 
-    private void maxHeapify(int pos)
-    {
-        if (!isLeaf(pos))
-        { 
-            if ( Heap[pos] < Heap[leftChild(pos)]  || Heap[pos] < Heap[rightChild(pos)])
-            {
-                if (Heap[leftChild(pos)] > Heap[rightChild(pos)])
-                {
-                    swap(pos, leftChild(pos));
-                    maxHeapify(leftChild(pos));
-                }else
-                {
-                    swap(pos, rightChild(pos));
-                    maxHeapify(rightChild(pos));
-                }
-            }
-        }
-    }
- 
-    public void insert(int element)
-    {
-        Heap[++size] = element;
-        int current = size;
- 
-        while(Heap[current] > Heap[parent(current)])
-        {
-            swap(current,parent(current));
-            current = parent(current);
-        }	
-    }
- 
-    public void print()
-    {
-        for (int i = 1; i <= size / 2; i++ )
-        {
-            System.out.print(" PARENT : " + Heap[i] + " LEFT CHILD : " + Heap[2*i]
-                  + " RIGHT CHILD :" + Heap[2 * i  + 1]);
-            System.out.println();
-        }
-    }
- 
-    public void maxHeap()
-    {
-        for (int pos = (size / 2); pos >= 1; pos--)
-        {
-            maxHeapify(pos);
-        }
-    }
- 
-    public int remove()
-    {
-        int popped = Heap[FRONT];
-        Heap[FRONT] = Heap[size--]; 
-        maxHeapify(FRONT);
-        return popped;
-    }
- 
-    public static void main(String...arg)
-    {
-        System.out.println("The Max Heap is ");
-        MaxHeap maxHeap = new MaxHeap(15);
-        maxHeap.insert(5);
-        maxHeap.insert(3);
-        maxHeap.insert(17);
-        maxHeap.insert(10);
-        maxHeap.insert(84);
-        maxHeap.insert(90);
-        maxHeap.insert(6);
-        maxHeap.insert(22);
-        maxHeap.insert(9);
-        maxHeap.maxHeap();
- 
-        maxHeap.print();
-        System.out.println("The max val is " + maxHeap.remove());
-    }
+
+	int[] a;
+	int size;
+	int n;
+	
+	public int getVal( int pos ) 
+	{		
+		return a[pos];
+	}
+		
+	
+	public MaxHeap( int size, int[] e ) 
+	{
+		this.size = size;
+		a = new int[size];
+		createHeap(e);
+	}
+	
+	public int parent( int pos ) 
+	{
+		return (pos-1)/2;
+	}
+	
+	public void createHeap( int[] e ) 
+	{
+		for( int val : e ) {
+			int curr = n++;
+			a[curr] = val;
+			while( curr != 0 && a[curr] > a[parent(curr)]) {
+				int t = a[curr];
+				a[curr] = a[parent(curr)];
+				a[parent(curr)] = t;
+				curr = parent(curr);
+			}
+		}
+	}
+	
+	public int getMax() 
+	{
+		int max = a[0];
+		a[0] = a[n-1];
+		a[n-1] = 0;
+		n--;
+		int pos = 0;
+		while( !leaf(pos) && ( a[pos] < a[left(pos)]) || a[pos] < a[right(pos)]) {
+			if( a[left(pos)] > a[right(pos)]) {
+				int t = a[pos];
+				a[pos] = a[left(pos)];
+				a[left(pos)] = t;
+				pos = left(pos);
+			} else {
+				int t = a[pos];
+				a[pos] = a[right(pos)];
+				a[right(pos)] = t;
+				pos = right(pos);
+			}
+		}
+		return max;
+	}
+	
+	public int getMax( int k ) 
+	{
+		int max = 0;
+		for( int i=0; i < k; i++ ) 
+		{
+			max = getMax();
+		}
+		return max;
+	}
+	
+	public boolean leaf( int pos ) 
+	{
+		return pos >= n/2;
+	}
+	
+	public int left( int pos ) 
+	{
+		return (2*pos + 1);
+	}
+	
+	public int right( int pos ) 
+	{
+		return (2*pos + 2);
+	}
+	
+	public static void main(String[] args) 
+	{
+		int[] a = {88, 30, 11, 17, 22, 16, 39, 8, 31, 55, 29, 63, 77, 69, 99, 90, 81, 2, 20, 53, 62, 5, 33, 44, 6};
+		int k = 5;
+		MaxHeap heap = new MaxHeap(50, a);
+		int res = heap.getMax( k );
+		System.out.println(k +"th maximum element from end is : " +res);
+	}
 }

@@ -3,7 +3,7 @@ package codingProblems;
 import java.util.ArrayList;
 import java.util.List;
 
-public class listOfList {
+public class PascalTriangle {
 	public List<List<Integer>> generate(int numRows) {
         List<List<Integer>> pascalTriangle = new ArrayList<List<Integer>>();
         for(int i=1; i<=numRows; i++){
@@ -26,7 +26,7 @@ public class listOfList {
         return pascalTriangle;
     }
     public static void main(String args[]){
-    	listOfList l = new listOfList();
+    	PascalTriangle l = new PascalTriangle();
     	List<List<Integer>> pascalTriangle = new ArrayList<List<Integer>>();
     	pascalTriangle = l.generate(5);
     	System.out.print("[\n");		
