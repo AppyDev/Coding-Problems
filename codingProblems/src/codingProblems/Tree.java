@@ -10,6 +10,11 @@ class Node{
 		left = null;
 		right = null;
 	}
+	public Node(){
+		this.data = 0;
+		left = null;
+		right = null;
+	}
 }
 
 public class Tree {

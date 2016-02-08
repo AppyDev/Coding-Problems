@@ -12,7 +12,7 @@ Output: index1=1, index2=2
 */
 
 public class twoSum {
-	public int[] twoSum(int[] nums, int target) {
+	public int[] twoSumMethod(int[] nums, int target) {
 		int answer[] = new int[2];
         for(int i=0; i<nums.length-1; i++){
         	for(int j=i+1; j<nums.length; j++){
@@ -30,7 +30,7 @@ public class twoSum {
 		twoSum t=new twoSum();
 		int nums[]={2,7,11,15};
 		int answer[];
-		answer = t.twoSum(nums, 17);
+		answer = t.twoSumMethod(nums, 17);
 		System.out.println("index1="+answer[0]+", index2="+answer[1]);
 	}
 

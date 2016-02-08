@@ -169,7 +169,28 @@ package codingProblems;
              postorder(r.getRight());
              System.out.print(r.getData() +" ");
          }
-     }     
+     }  
+     public BTNode kthmaximum(int k)
+     {
+    	 if(root == null)
+    		 return null;
+    	 else if (countNodes(root) < k ) 
+    		 return null;
+    	 return kthmaximum(k, root);
+     }
+     private BTNode kthmaximum(int k, BTNode node)
+     {
+    	 if (countNodes(node.getLeft()) == k + 1) 
+    	 {
+    		 return node;
+    	 }
+    	 if (countNodes(node.getLeft()) > k)
+    		 return kthmaximum(k, node.getLeft());
+		 else 
+		 {
+			 return kthmaximum(k-(countNodes(node.getRight())+1), node.getRight());
+		 }
+     }
  }
  
  /* Class BinaryTree */
@@ -190,6 +211,7 @@ package codingProblems;
             System.out.println("2. search");
             System.out.println("3. count nodes");
             System.out.println("4. check empty");
+            System.out.println("5. Nth node");
  
             int choice = scan.nextInt();            
             switch (choice)
@@ -207,7 +229,16 @@ package codingProblems;
                 break;     
             case 4 : 
                 System.out.println("Empty status = "+ bt.isEmpty());
-                break;            
+                break;  
+            case 5 : 
+            	BTNode result=bt.kthmaximum(3);
+            	String ans;
+            	if(result==null)
+            		ans="Not Found";
+            	else
+            		ans=""+result.data;
+                System.out.println("Nth node = "+ ans);
+                break;   
             default : 
                 System.out.println("Wrong Entry \n ");
                 break;   
