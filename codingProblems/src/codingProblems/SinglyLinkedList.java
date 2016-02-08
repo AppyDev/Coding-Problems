@@ -183,6 +183,43 @@ class linkedList
 		}
 		System.out.print(ptr.getData()+ "\n");
 	}
+	//reverse a list Iterative
+	public LLNode reverseListIterative(LLNode head) {
+	    if(head==null || head.link == null) 
+	        return head;
+	 
+	    LLNode p1 = head;
+	    LLNode p2 = head.link;
+	 
+	    head.link = null;
+	    while(p1!= null && p2!= null){
+	        LLNode t = p2.link;
+	        p2.link = p1;
+	        p1 = p2;
+	        if (t!=null){
+	            p2 = t;
+	        }else{
+	            break;
+	        }
+	    }
+	 
+	    return p2;
+	}
+	//recursive reverse list
+	public ListNode reverseListRecursive(ListNode head) {
+	    if(head==null || head.next == null)
+	        return head;
+	 
+	    //get second node    
+	    ListNode second = head.next;
+	    //set first's next to be null
+	    head.next = null;
+	 
+	    ListNode rest = reverseListRecursive(second);
+	    second.next = head;
+	 
+	    return rest;
+	}
 }
 
 /*  Class SinglyLinkedList  */
