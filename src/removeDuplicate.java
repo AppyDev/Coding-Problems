@@ -1,4 +1,3 @@
-package codingProblems;
 public class removeDuplicate {
 	/* Name of the class has to be "Main" only if the class is public. */
 	static String removeDuplicates(String word) {

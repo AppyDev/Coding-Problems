@@ -1,9 +1,6 @@
-package codingProblems;
 import java.util.*;
-public class Anagram 
-{
-	public static boolean isAnagram(String firstWord, String secondWord) 
-	{
+public class Anagram {
+	public static boolean isAnagram(String firstWord, String secondWord) {
 	     char[] word1 = firstWord.replaceAll("[\\s]", "").toCharArray();
 	     char[] word2 = secondWord.replaceAll("[\\s]", "").toCharArray();
 	     Arrays.sort(word1);
